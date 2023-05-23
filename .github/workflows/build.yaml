@@ -2,7 +2,7 @@ name: Build Front
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -16,7 +16,6 @@ jobs:
 
       - name: Build front
         run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
           npm install
           npm run build
 
@@ -34,8 +33,8 @@ jobs:
       - name: Get image tag(verion)
         id: image
         run: |
-          VERSION = $(echo ${{ github.sha }} | cut -c1-8)
-          echo VERSION = $VERSION
+          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
+          echo VERSION=$VERSION
           echo "::set-output name=version::$VERSION"
 
       - name: Build, tag, and push image to Amazon ECR
